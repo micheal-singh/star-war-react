@@ -1,13 +1,14 @@
-exports.up = (knex) => {
-  return knex.schema.createTable('widgets', (table) => {
+exports.up = function(knex) {
+  return knex.schema.createTable('forceUsers', (table) => {
     table.increments('id').primary()
     table.string('name')
-    table.integer('price')
-    table.string('mfg')
-    table.integer('inStock')
+    table.string('homeWorld')
+    table.boolean('jedi').default(true)
+    table.boolean('sith').default(true)
+    table.boolean('neutral').default(true)
   })
 }
 
-exports.down = (knex) => {
-  return knex.schema.dropTable('widgets')
+exports.down = function(knex) {
+  return knex.schema.dropTable('forceUsers')
 }
