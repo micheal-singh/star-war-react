@@ -50,9 +50,9 @@ router.post('/', (req, res) => {
       sith = '1'
     }
   }
-  db.getAddForceUser({ name, homeWorld, jedi, sith, neutral})
-    .then(forceUsers => {
-      res.render('character', forceUsers)
+  db.addForceUser({ name, homeWorld, jedi, sith, neutral})
+    .then((forceUser) => {
+      res.json(forceUser)
       return null
     })
     .catch(err => {
