@@ -4,9 +4,9 @@ const connection = require('knex')(config)
 
 module.exports = {
   getForceUsers: getForceUsers,
-  getJedis: getJedis,
-  getSiths: getSiths,
-  getNeutrals: getNeutrals,
+  // getJedis: getJedis,
+  // getSiths: getSiths,
+  // getNeutrals: getNeutrals,
   getForceUser: getForceUser,
   addForceUser: addForceUser,
   deleteForceUser: deleteForceUser
@@ -18,38 +18,38 @@ function getForceUsers (db = connection) {
     .select()
 }
 
-// All jedis
-function getJedis (db = connection) {
-  return db('forceUsers')
-    .select()
-    .where({ jedi: true })
-}
+// // All jedis
+// function getJedis (db = connection) {
+//   return db('forceUsers')
+//     .select()
+//     .where({ jedi: true })
+// }
 
-// All siths
-function getSiths (db = connection) {
-  return db('forceUsers')
-    .select()
-    .where({ sith: true })
-}
+// // All siths
+// function getSiths (db = connection) {
+//   return db('forceUsers')
+//     .select()
+//     .where({ sith: true })
+// }
 
-// All neutrals
-function getNeutrals (db = connection) {
-  return db('forceUsers')
-    .select()
-    .where({ neutral: true })
-}
+// // All neutrals
+// function getNeutrals (db = connection) {
+//   return db('forceUsers')
+//     .select()
+//     .where({ neutral: true })
+// }
 
 // single force user
 function getForceUser (id, db = connection) {
   return db('forceUsers')
     .select()
-    .where('forceUsers.id', id)
+    .where('id', id)
     .first()
 }
 
 // new force user
 function addForceUser (data, db = connection) {
-  const { name, homeWorld, jedi, sith, neutral} = data
+  const { name, homeWorld, jedi, sith, neutral } = data
   return db('forceUsers')
     .insert({ name, homeWorld, jedi, sith, neutral })
     .then(([newId]) => {
