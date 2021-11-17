@@ -7,7 +7,7 @@ module.exports = {
   getJedis: getJedis,
   getSiths: getSiths,
   getNeutrals: getNeutrals,
-  getforceUser: getforceUser,
+  getForceUser: getForceUser,
   addForceUser: addForceUser,
   deleteForceUser: deleteForceUser
 }
@@ -40,7 +40,7 @@ function getNeutrals (db = connection) {
 }
 
 // single force user
-function getforceUser (id, db = connection) {
+function getForceUser (id, db = connection) {
   return db('forceUsers')
     .select()
     .where('forceUsers.id', id)
@@ -53,7 +53,7 @@ function addForceUser (data, db = connection) {
   return db('forceUsers')
     .insert({ name, homeWorld, jedi, sith, neutral })
     .then(([newId]) => {
-      return getforceUser(newId)
+      return getForceUser(newId)
     })
 }
 

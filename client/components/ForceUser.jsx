@@ -1,17 +1,15 @@
 import React from 'react'
-import { deleteForceUser } from '../api'
 
-export function ForceUser (props) {
-  const forceUser = props.forceUser
+export default function ForceUser ({ id, name, homeWorld, jedi, sith, neutral }) {
+  console.log(ForceUser(), 'line 4')
   return (
-    <li key={forceUser.id}>{forceUser.name} {forceUser.homeWorld} {forceUser.jedi} {forceUser.sith} {forceUser.neutral} 
-      <button onClick={() => {
-        deleteForceUser(forceUser.id)
-          .then(props.deleteForceUserId(forceUser.id))
-          .catch((err) => {
-            console.log(err.message)
-          })
-        return null
-      }}>Delete</button></li>
+    <div>
+      <h1>{id}</h1>
+      <h1>{name}</h1>
+      <h1>{homeWorld}</h1>
+      <h1>{jedi}</h1>
+      <h1>{sith}</h1>
+      <h1>{neutral}</h1>
+    </div>
   )
 }

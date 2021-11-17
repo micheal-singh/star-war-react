@@ -7,13 +7,13 @@ router.get('/', (req, res) => {
   db.getForceUsers()
     .then(forceUsers => {
       forceUsers.forEach((forceUser) => {
-        console.log(forceUser.jedi)
+        // console.log(forceUser.jedi)
         if (forceUser.jedi === '1') {
           forceUser.jedi = 'jedi'
         }
       })
       res.json(forceUsers)
-      console.log(forceUsers)
+      // console.log(forceUsers)
       return null
     })
     .catch(err => {
@@ -21,6 +21,21 @@ router.get('/', (req, res) => {
     })
 })
 
+// single force user
+router.get('/:id', (req, res) => {
+  const id = req.params.id
+  db.getForceUser(id)
+    .then(forceUser => {
+      res.json(forceUser)
+      return null
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).send('error')
+    })
+})
+
+// delete force user
 router.delete('/:id', (req, res) => {
   const id = req.params.id
   db.deleteForceUser(id)
@@ -50,7 +65,7 @@ router.post('/', (req, res) => {
       sith = '1'
     }
   }
-  db.addForceUser({ name, homeWorld, jedi, sith, neutral})
+  db.addForceUser({ name, homeWorld, jedi, sith, neutral })
     .then((forceUser) => {
       res.json(forceUser)
       return null
