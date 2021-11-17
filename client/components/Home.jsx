@@ -1,25 +1,44 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { deleteForceUser } from '../api'
+import { deleteForceUser, getForceUser } from '../api'
 
-export function Home (props) {
-  const forceUser = props.forceUser
+export default function Home (props) {
+  const [forceUser, setforceUser] = useState([])
+
+  useEffect(() => {
+    const id = props.forceUser.id
+    if (id) {
+      fetchForceUser(id)
+    }
+  }, [])
+
+  function fetchForceUser (id) {
+    getForceUser(id)
+      .then(forceUser => {
+        setforceUser(forceUser)
+        return null
+      })
+      .catch(err => console.log(err.message))
+  }
+
+  const { id, name, homeWorld, jedi, sith, neutral } = props.forceUser
   return (
-    <li key={forceUser.id}>
-      <Link to={'/' + forceUser.id} >
-        {forceUser.name}
+    <div>
+      <Link to={`/${id}`} >
+        {name}
       </Link>
-      {forceUser.homeWorld}
-      {forceUser.jedi}
-      {forceUser.sith}
-      {forceUser.neutral}
+      {homeWorld}
+      {jedi}
+      {sith}
+      {neutral}
       <button onClick={() => {
-        deleteForceUser(forceUser.id)
-          .then(props.deleteForceUserId(forceUser.id))
+        deleteForceUser(id)
+          .then(props.deleteForceUserId(id))
           .catch((err) => {
             console.log(err.message)
           })
         return null
-      }}>Delete</button></li>
+      }}>Delete</button>
+    </div>
   )
 }

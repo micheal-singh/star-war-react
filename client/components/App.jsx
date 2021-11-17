@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { getForceUsers } from '../api'
-import { Route } from 'react-router-dom'
 
-import { Home } from './Home'
 import { Form } from './Form'
-import Nav from './Nav'
-import ForceUser from './ForceUser'
+// import AppRoutes from './AppRoutes'
+import Home from './Home'
 
 function App () {
   const [forceUsers, setForceUsers] = useState([])
@@ -34,14 +32,20 @@ function App () {
   return (
     <div>
       <h1>forceUsers for the win!</h1>
-      {
-        forceUsers.map((forceUser) => {
-          return <Home key={forceUser.id} forceUser={forceUser} deleteForceUserId={deleteForceUserId} />
+      {/* {
+        forceUsers.map(({ id, name, homeWorld, jedi, sith, neutral }) => {
+          return (
+            <li key={id}>{name} {homeWorld} {jedi} {sith} {neutral}</li>
+          )
         })
-      }
+      } */}
       <div>
-        <Route path='/' component={ Nav } />
-        <Route path={'/:forceUser.id'} component={ ForceUser } />
+        {/* <AppRoutes /> */}
+        {
+          forceUsers.map((forceUser) => {
+            return <Home key={forceUser.id} forceUser={forceUser} deleteForceUserId={deleteForceUserId} />
+          })
+        }
       </div>
       <div>
         <Form refreshForceUser={refreshForceUser}/>

@@ -49,7 +49,7 @@ function getForceUser (id, db = connection) {
 
 // new force user
 function addForceUser (data, db = connection) {
-  const { name, homeWorld, jedi, sith, neutral} = data
+  const { name, homeWorld, jedi, sith, neutral } = data
   return db('forceUsers')
     .insert({ name, homeWorld, jedi, sith, neutral })
     .then(([newId]) => {

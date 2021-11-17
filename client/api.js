@@ -11,10 +11,12 @@ export function getForceUsers () {
 export function getForceUser (id) {
   console.log(id, 'line 12')
   return request
-    .get(forceUsersUrl + '/' + id)
-    .then(response => {
-      return response.body
+    .get(`/api/v1/forceUsers/${id}`)
+    .then(res => {
+      console.log(res.body, 'line 16')
+      return res.body
     })
+    .catch(err => (console.log(err.message)))
 }
 
 export function addForceUser (forceUser) {
@@ -24,6 +26,7 @@ export function addForceUser (forceUser) {
     .then(response => {
       return response.body
     })
+    .catch(err => (console.log(err.message)))
 }
 
 export function deleteForceUser (id) {
@@ -32,4 +35,5 @@ export function deleteForceUser (id) {
     .then(response => {
       return response.body
     })
+    .catch(err => (console.log(err.message)))
 }
